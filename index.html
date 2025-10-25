@@ -1,21 +1,283 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My First Web Page</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Hacktoberfest — a month-long celebration of open-source contribution. Learn how to join, contribute and win swag." />
+  <title>Hacktoberfest — Contribute to Open Source</title>
+
+
+
   <style>
-    body {
-      background: #121212;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 100px;
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ff7a18;
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.03);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    h1 { color: #ff3c00; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,#071028 0%, #081426 60%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    .container{max-width:1100px;margin:0 auto;padding:28px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff4d6d);
+      display:grid;place-items:center;font-weight:700;color:#071022;font-size:20px;
+      box-shadow:0 6px 18px rgba(255,122,24,0.12);
+    }
+    h1{font-size:clamp(1.6rem,2.8vw,2.4rem);margin:0}
+    p.lead{color:var(--muted);margin:8px 0 0}
+    nav a{color:var(--muted);text-decoration:none;margin-left:16px}
+    nav a:hover{color:#fff}
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:28px;margin:18px 0;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:center;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+    .cta{display:flex;gap:12px;margin-top:16px}
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#071022;font-weight:700;text-decoration:none;
+      box-shadow:0 6px 18px rgba(255,122,24,0.12);
+    }
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+    .card{background:var(--card);padding:18px;border-radius:12px}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+    .feature{padding:14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)}
+    .feature h3{margin:8px 0 6px;font-size:1.05rem}
+    .timeline{margin-top:16px}
+    .step{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .step:last-child{border-bottom:0}
+    .step .dot{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,0.03);font-weight:700}
+    footer{margin-top:28px;color:var(--muted);font-size:0.9rem;padding:32px 0;border-top:1px solid rgba(255,255,255,0.02)}
+    .faq{margin-top:18px}
+    .faq-item{margin-bottom:12px}
+    .question{cursor:pointer;padding:10px;border-radius:10px;background:rgba(255,255,255,0.01);display:flex;justify-content:space-between;align-items:center}
+    .answer{padding:10px 12px;margin-top:8px;background:rgba(255,255,255,0.01);border-radius:8px;color:var(--muted);display:none}
+    .answer.show{display:block}
+    code{background:rgba(255,255,255,0.03);padding:2px 6px;border-radius:6px;color:#fff}
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr; text-align:left}
+      nav{display:none}
+    }
   </style>
 </head>
 <body>
-  <h1>Hello World 👋</h1>
-  <p>Welcome to my first GitHub-hosted website!</p>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">HF</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:6px"><strong>Hacktoberfest Guide</strong></div>
+          <div style="font-size:12px;color:var(--muted)">Community guide • Get started with open source</div>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#how">How to join</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="hero" aria-labelledby="hero-heading">
+        <div>
+          <h1 id="hero-heading">Hacktoberfest: Celebrate Open Source</h1>
+          <p class="lead">A friendly guide to participating in Hacktoberfest — learn how to find projects, submit PRs, and earn community swag.</p>
+
+          <div class="features" aria-hidden="false" style="margin-top:18px">
+            <div class="feature">
+              <h3>Who can join?</h3>
+              <p class="muted">Anyone — students, beginners, and experienced devs. Contributions can be code, docs, translations, or issues (depends on program rules).</p>
+            </div>
+            <div class="feature">
+              <h3>What counts?</h3>
+              <p class="muted">Valid pull requests to participating repositories. Always read the repo's contribution guidelines and maintainers' labels (e.g., good first issue).</p>
+            </div>
+            <div class="feature">
+              <h3>Pro tip</h3>
+              <p class="muted">Look for repos with labels like <code>good first issue</code>, <code>beginner</code>, or <code>help wanted</code>.</p>
+            </div>
+          </div>
+
+          <div class="cta">
+            <a class="btn" href="#how">How to participate</a>
+            <a class="btn ghost" href="#faq">Read FAQ</a>
+          </div>
+        </div>
+
+        <aside class="card" aria-label="Quick checklist">
+          <h3 style="margin-top:0">Quick checklist</h3>
+          <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted);">
+            <li>Create or sign in to a GitHub account</li>
+            <li>Find an open-source project to contribute to</li>
+            <li>Open a PR following repo rules</li>
+            <li>Repeat until you meet the event's PR requirement</li>
+            <li>Enjoy swag / recognition (if provided)</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="about" class="card" style="margin-top:18px">
+        <h2 style="margin:0 0 6px">About Hacktoberfest</h2>
+        <p style="color:var(--muted);margin:0 0 10px">
+          Hacktoberfest is a month-long event that encourages contributions to open source. It’s a great time to start contributing, learn collaboration workflows, and help maintainers.
+        </p>
+
+        <div id="how" class="timeline">
+          <h3 style="margin-top:12px">How to participate — step by step</h3>
+
+          <div class="step" aria-hidden="false">
+            <div class="dot">1</div>
+            <div>
+              <strong>Register or sign in</strong>
+              <div style="color:var(--muted)">Sign in to GitHub. Some program editions may require explicit registration on the official site — check the official event page for the current year.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot">2</div>
+            <div>
+              <strong>Find issues to work on</strong>
+              <div style="color:var(--muted)">Search repositories for <code>good first issue</code>, <code>help wanted</code>, or language-specific tags. Read CONTRIBUTING.md and open an issue or comment to ask before starting where appropriate.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot">3</div>
+            <div>
+              <strong>Make your changes</strong>
+              <div style="color:var(--muted)">Fork the repo, create a branch, implement your fix, add tests or docs if needed, and push your branch.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot">4</div>
+            <div>
+              <strong>Open a pull request</strong>
+              <div style="color:var(--muted)">Open a PR with a clear title and description. Reference any issues and follow template guidelines. Be patient and responsive to maintainer feedback.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot">5</div>
+            <div>
+              <strong>Repeat</strong>
+              <div style="color:var(--muted)">Submit the number of valid PRs required by that year's rules (often 4) to earn event eligibility. Rules and validity checks vary by organizer.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline" class="card" style="margin-top:18px">
+        <h2 style="margin:0 0 6px">Common timeline / tips</h2>
+        <p style="color:var(--muted);margin:0 0 8px">Hacktoberfest usually takes place in October. Repos and maintainers may set rules and label requirements — always check current event guidance before assuming anything.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)">
+            <strong>Before October</strong>
+            <p style="color:var(--muted);margin:8px 0 0">Find projects, read the contributing guide, and discuss issues with maintainers.</p>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)">
+            <strong>During October</strong>
+            <p style="color:var(--muted);margin:8px 0 0">Open PRs, respond to reviews, and help others. Keep PRs meaningful — avoid spammy or trivial changes unless asked.</p>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)">
+            <strong>After the event</strong>
+            <p style="color:var(--muted);margin:8px 0 0">Follow up on merged PRs, keep contributing, and thank maintainers — healthy open-source communities need sustained help.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="card" style="margin-top:18px">
+        <h2 style="margin:0 0 6px">FAQ</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <div class="question" data-toggle="q1">
+              <div><strong>Is Hacktoberfest free?</strong></div>
+              <div aria-hidden="true">+</div>
+            </div>
+            <div id="q1" class="answer">Participation is free. Some editions may offer paid swag or prizes — check the official event page for the year's specifics.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="question" data-toggle="q2">
+              <div><strong>Do documentation PRs count?</strong></div>
+              <div aria-hidden="true">+</div>
+            </div>
+            <div id="q2" class="answer">Often yes. Many maintainers welcome documentation, translations, tests, and other non-code contributions. Confirm by reading repository contributing guidelines.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="question" data-toggle="q3">
+              <div><strong>What makes a PR invalid?</strong></div>
+              <div aria-hidden="true">+</div>
+            </div>
+            <div id="q3" class="answer">Invalid PRs may include spam, trivial whitespace-only changes, or changes made without following repo rules. Always follow maintainers' guidance.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex;flex-direction:row;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+        <div>
+          <strong>Hacktoberfest Guide</strong> — A community-made guide. Not affiliated with any official program.
+          <div style="color:var(--muted);margin-top:6px">Made with ❤️ — share, learn, and give back to open source.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a href="https://github.com" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">GitHub</a>
+          <a href="#" id="report" style="color:var(--muted);text-decoration:none">Report an issue</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Basic FAQ toggle
+    document.querySelectorAll('.question').forEach(q => {
+      q.addEventListener('click', () => {
+        const id = q.getAttribute('data-toggle');
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.toggle('show');
+        // update plus/minus
+        q.querySelector('[aria-hidden]').textContent = el.classList.contains('show') ? '−' : '+';
+      });
+    });
+
+    // "Report an issue" link - open GitHub new issue template for this repo if user clicks.
+    document.getElementById('report').addEventListener('click', (e) => {
+      e.preventDefault();
+      const repo = prompt('Enter your GitHub repo path (username/repo) to open an issue there, or leave empty to go to github.com:');
+      if (repo) {
+        window.open('https://github.com/' + encodeURIComponent(repo) + '/issues/new', '_blank');
+      } else {
+        window.open('https://github.com/issues', '_blank');
+      }
+    });
+
+    // Small accessibility: allow keyboard toggle for FAQ
+    document.querySelectorAll('.question').forEach(q => {
+      q.tabIndex = 0;
+      q.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          q.click();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
